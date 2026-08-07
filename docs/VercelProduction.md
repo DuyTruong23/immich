@@ -3,8 +3,8 @@
 ## Kiến trúc (same-origin)
 
 ```
-Browser → gallery-app.pp.ua/api/*       → Vercel Edge Function → immich.gallery-app.pp.ua (PC tunnel)
-Browser → gallery-app.pp.ua/api/socket.io → Vercel rewrite → tunnel (WebSocket)
+Browser → gallery-app.pp.ua/api/*       → Vercel rewrite/middleware → immich.gallery-app.pp.ua (REST)
+Browser → wss://immich.gallery-app.pp.ua/api/socket.io → Cloudflare tunnel (WebSocket trực tiếp)
 Browser → gallery-app.pp.ua/*           → Vercel static (custom UI)
 ```
 
@@ -15,6 +15,9 @@ Browser → gallery-app.pp.ua/*           → Vercel static (custom UI)
 ```env
 # ĐỂ TRỐNG — SDK dùng relative /api (cùng origin)
 PUBLIC_IMMICH_SERVER_URL=
+
+# WebSocket trực tiếp — Vercel KHÔNG proxy WebSocket upgrade
+PUBLIC_IMMICH_WS_URL=https://immich.gallery-app.pp.ua
 
 # Server-side — Edge Function proxy (không PUBLIC)
 IMMICH_SERVER_URL=https://immich.gallery-app.pp.ua
@@ -63,3 +66,4 @@ curl -sS https://immich.gallery-app.pp.ua/api/server/ping
 | Chưa redeploy sau đổi env | Redeploy |
 | Tunnel/Immich down | `docker compose ps` trên PC |
 | Thiếu `IMMICH_SERVER_URL` | Set trên Vercel (server env) |
+| WebSocket failed trên `/explore` | Set `PUBLIC_IMMICH_WS_URL=https://immich.gallery-app.pp.ua` + redeploy |
