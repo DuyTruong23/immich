@@ -10,3 +10,9 @@ packages:
 preferWorkspacePackages: true
 injectWorkspacePackages: true
 verifyDepsBeforeRun: false
+allowBuilds:
+  '@parcel/watcher': true
+  canvas: true
+  es5-ext: true
+  esbuild: true
+  sharp: true
