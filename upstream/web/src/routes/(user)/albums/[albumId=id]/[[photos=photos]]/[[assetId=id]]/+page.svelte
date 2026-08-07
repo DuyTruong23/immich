@@ -375,7 +375,8 @@
               {/if}
 
               <!-- ALBUM SHARING -->
-              {#if album.albumUsers.length > 1 || (album.hasSharedLink && isOwned)}
+              <!-- Duy TODO nếu là admin thì hiện -->
+              {#if album.albumUsers.length < 1 || (album.hasSharedLink && isOwned)}
                 <div class="my-3 flex gap-x-1">
                   <button
                     class="flex gap-x-1"
