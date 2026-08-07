@@ -5,6 +5,7 @@ packages:
   - branding
   - custom
   - overrides
+  - "@parcel/watcher"
 
 preferWorkspacePackages: true
 injectWorkspacePackages: true
