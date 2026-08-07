@@ -1,12 +1,17 @@
 const DEFAULT_UPSTREAM = 'https://immich.gallery-app.pp.ua';
 
+const getUpstreamBase = (): string => {
+  const env = (globalThis as { process?: { env?: Record<string, string | undefined> } }).process?.env;
+  return (env?.IMMICH_SERVER_URL ?? DEFAULT_UPSTREAM).replace(/\/$/, '');
+};
+
 export const config = {
   matcher: ['/api/:path*'],
 };
 
 /** Chạy trước static/rewrites — proxy /api → Immich tunnel */
 export default async function middleware(request: Request): Promise<Response> {
-  const upstreamBase = (process.env.IMMICH_SERVER_URL ?? DEFAULT_UPSTREAM).replace(/\/$/, '');
+  const upstreamBase = getUpstreamBase();
   const url = new URL(request.url);
   const targetUrl = `${upstreamBase}${url.pathname}${url.search}`;
 
