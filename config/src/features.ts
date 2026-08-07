@@ -8,6 +8,7 @@ export type FeatureKey =
   | 'people'
   | 'admin'
   | 'search'
+  | 'explore'
   | 'trash'
   | 'utilities'
   | 'workflows'
@@ -36,6 +37,7 @@ export const createFeatureFlags = (env: Record<string, string | undefined>, publ
   people: readFlag(env, 'PUBLIC_ENABLE_PEOPLE', true),
   admin: readFlag(env, 'PUBLIC_ENABLE_ADMIN', publicEnv.enableAdmin),
   search: readFlag(env, 'PUBLIC_ENABLE_SEARCH', true),
+  explore: readFlag(env, 'PUBLIC_ENABLE_EXPLORE', true),
   trash: readFlag(env, 'PUBLIC_ENABLE_TRASH', true),
   utilities: readFlag(env, 'PUBLIC_ENABLE_UTILITIES', true),
   workflows: readFlag(env, 'PUBLIC_ENABLE_WORKFLOWS', true),
@@ -54,7 +56,8 @@ export const disabledRoutePatterns: Record<FeatureKey, RegExp[]> = {
   map: [/^\/map(\/|$|#)/],
   people: [/^\/people(\/|$)/],
   admin: [/^\/admin(\/|$)/],
-  search: [/^\/search(\/|$)/, /^\/explore(\/|$)/],
+  search: [/^\/search(\/|$)/],
+  explore: [/^\/explore(\/|$)/],
   trash: [/^\/trash(\/|$)/],
   utilities: [/^\/utilities(\/|$)/],
   workflows: [/^\/workflows(\/|$)/],

@@ -59,6 +59,7 @@ Không phát triển trực tiếp trên `main`.
 | Doc | Mô tả |
 |---|---|
 | [Architecture](docs/Architecture.md) | Kiến trúc tổng thể |
+| [Distributed-Setup](docs/Distributed-Setup.md) | Local dev + Vercel (Immich Docker ở đâu cũng được) |
 | [Development](docs/Development.md) | Setup & dev workflow |
 | [Deployment](docs/Deployment.md) | Vercel + Immich Docker |
 | [Customization](docs/Customization.md) | Branding, overrides, custom pages |

@@ -1,8 +1,11 @@
 # Vercel MCP + Cursor
 
-## Cấu hình (đã thêm trong repo)
+## Cách 1 — Qua UI Cursor (khuyến nghị, không cần link one-click)
 
-File [`.cursor/mcp.json`](../.cursor/mcp.json):
+1. Mở **Cursor Settings**: `Ctrl + Shift + J` hoặc **File → Preferences → Cursor Settings**
+2. Vào tab **MCP** (hoặc search "MCP")
+3. Click **Add new global MCP server** (hoặc **Edit MCP config**)
+4. Thêm block sau (nếu file đã có server khác, merge vào `mcpServers`):
 
 ```json
 {
@@ -14,36 +17,76 @@ File [`.cursor/mcp.json`](../.cursor/mcp.json):
 }
 ```
 
-## Kích hoạt
+5. **Save** → click **Reload** (icon refresh cạnh MCP)
+6. Server `vercel` hiện trạng thái **Needs login** → click → đăng nhập Vercel OAuth
 
-1. **Reload MCP** trong Cursor: Settings → MCP → Reload (hoặc restart Cursor)
-2. Click **"Needs login"** trên server `vercel` → đăng nhập OAuth Vercel
-3. (Tuỳ chọn) Scope theo project — thay URL bằng:
-   `https://mcp.vercel.com/<team>/<project>`
+## Cách 2 — Sửa file trực tiếp
 
-Hoặc one-click: [Install Vercel MCP in Cursor](cursor://anysphere.cursor-deeplink/mcp/install?name=vercel&config=eyJ1cmwiOiJodHRwczovL21jcC52ZXJjZWwuY29tIn0%3D)
+**Global** (áp dụng mọi project):
 
-## CLI (nếu có Vercel CLI)
+```
+C:\Users\LENOVO\.cursor\mcp.json
+```
+
+**Project** (chỉ repo này):
+
+```
+.cursor/mcp.json
+```
+
+Nội dung:
+
+```json
+{
+  "mcpServers": {
+    "vercel": {
+      "url": "https://mcp.vercel.com"
+    }
+  }
+}
+```
+
+Sau đó **restart Cursor** hoặc MCP → Reload.
+
+## Cách 3 — Vercel CLI
 
 ```bash
 npx vercel login
+cd D:/Personal/Coding/poga-v2
 npx vercel link
 npx vercel mcp --clients Cursor
 ```
 
-## Dùng MCP để debug deploy
+## Scope theo project (tuỳ chọn)
 
-Sau khi login, hỏi agent:
+Sau `vercel link`, có thể dùng URL scoped:
 
-- "List Vercel deployments for photo-gallery"
-- "Show logs for latest failed deployment"
-- "What routes/functions are deployed?"
+```
+https://mcp.vercel.com/<team-slug>/<project-slug>
+```
 
-## Env bắt buộc trên Vercel
+Ví dụ project `photo-gallery-silk-alpha` — lấy team/project slug từ Vercel Dashboard → Project → Settings.
+
+## Kiểm tra đã hoạt động
+
+- Settings → MCP → `vercel` = **Connected** (xanh)
+- Chat: *"List my Vercel deployments"*
+
+## Link one-click không click được?
+
+Link `cursor://...` thường **không hoạt động** khi:
+
+- Mở từ chat/web thay vì terminal Cursor
+- Windows chưa gán protocol `cursor://`
+- Cursor chưa chạy
+
+→ Dùng **Cách 1** hoặc **Cách 2** ở trên.
+
+## Env Vercel (deploy gallery-app)
 
 ```env
 PUBLIC_IMMICH_SERVER_URL=
 IMMICH_SERVER_URL=https://immich.gallery-app.pp.ua
 ```
 
-Proxy API qua `middleware.ts` (root) — chạy **trước** SPA fallback.
+Proxy API: `middleware.ts` ở repo root.

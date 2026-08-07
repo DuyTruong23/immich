@@ -32,27 +32,3 @@
   {/each}
 </div>
 <br />
-<div class="rounded-3xl border border-gray-300 pt-1 pb-6 dark:border-immich-dark-gray dark:text-white">
-  <Text size="tiny" color="muted" fontWeight="medium" class="p-4">{$t('download')}</Text>
-
-  <button
-    type="button"
-    onclick={() => modalManager.show(ObtainiumConfigModal, {})}
-    class="flex w-full items-center gap-4 p-4 hover:bg-gray-100 dark:hover:bg-immich-dark-gray"
-  >
-    <span>
-      <Icon icon={mdiLinkEdit} class="text-immich-primary dark:text-immich-dark-primary" size="24" />
-    </span>
-    {$t('obtainium_configurator')}
-  </button>
-  <button
-    type="button"
-    onclick={() => modalManager.show(AppDownloadModal, {})}
-    class="flex w-full items-center gap-4 p-4 hover:bg-gray-100 dark:hover:bg-immich-dark-gray"
-  >
-    <span>
-      <Icon icon={mdiCellphoneArrowDownVariant} class="text-immich-primary dark:text-immich-dark-primary" size="24" />
-    </span>
-    {$t('app_download_links')}
-  </button>
-</div>

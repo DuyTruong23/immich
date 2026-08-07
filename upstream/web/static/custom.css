@@ -1,6 +1,6 @@
-@import '@photo-gallery/branding/theme-light.css';
-@import '@photo-gallery/branding/theme-dark.css';
-@import '@photo-gallery/branding/loading.css';
+@import '/branding/theme-light.css';
+@import '/branding/theme-dark.css';
+@import '/branding/loading.css';
 
 .pg-brand-accent {
   color: var(--pg-primary);

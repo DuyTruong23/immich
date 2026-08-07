@@ -4,6 +4,7 @@ export {
   getServerStatistics,
   getServerVersion,
   getServerLicense,
+  getStorage,
   pingServer,
   getAboutInfo,
 } from '@immich/sdk';

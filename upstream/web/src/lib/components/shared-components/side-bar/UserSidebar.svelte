@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { getAppConfig } from '@photo-gallery/config';
   import BottomInfo from '$lib/components/shared-components/side-bar/BottomInfo.svelte';
   import RecentAlbums from '$lib/components/shared-components/side-bar/RecentAlbums.svelte';
   import Sidebar from '$lib/components/sidebar/Sidebar.svelte';
@@ -32,36 +33,45 @@
     mdiTrashCan,
     mdiTrashCanOutline,
     mdiUploadOutline,
+    mdiViewDashboardOutline,
   } from '@mdi/js';
   import { t } from 'svelte-i18n';
   import { fly } from 'svelte/transition';
+
+  const { features } = getAppConfig();
 </script>
 
 <Sidebar ariaLabel={$t('primary')}>
   <NavbarItem title={$t('photos')} href={Route.photos()} icon={mdiImageMultipleOutline} activeIcon={mdiImageMultiple} />
 
-  {#if featureFlagsManager.value.search}
+  {#if features.dashboard && authManager.authenticated && authManager.user.isAdmin}
+    <NavbarItem title="Dashboard" href="/dashboard" icon={mdiViewDashboardOutline} />
+  {/if}
+
+  {#if features.explore && features.search && featureFlagsManager.value.search}
     <NavbarItem title={$t('explore')} href={Route.explore()} icon={mdiMagnify} />
   {/if}
 
-  {#if featureFlagsManager.value.map}
+  {#if features.map && featureFlagsManager.value.map}
     <NavbarItem title={$t('map')} href={Route.map()} icon={mdiMapOutline} activeIcon={mdiMap} />
   {/if}
 
-  {#if authManager.preferences.people.enabled && authManager.preferences.people.sidebarWeb}
+  {#if features.people && authManager.preferences.people.enabled && authManager.preferences.people.sidebarWeb}
     <NavbarItem title={$t('people')} href={Route.people()} icon={mdiAccountOutline} activeIcon={mdiAccount} />
   {/if}
 
-  {#if authManager.preferences.sharedLinks.enabled && authManager.preferences.sharedLinks.sidebarWeb}
+  {#if features.sharedLinks && authManager.preferences.sharedLinks.enabled && authManager.preferences.sharedLinks.sidebarWeb}
     <NavbarItem title={$t('shared_links')} href={Route.sharedLinks()} icon={mdiLink} />
   {/if}
 
-  <NavbarItem
-    title={$t('sharing')}
-    href={Route.sharing()}
-    icon={mdiAccountMultipleOutline}
-    activeIcon={mdiAccountMultiple}
-  />
+  {#if features.sharing && authManager.authenticated && authManager.user.isAdmin}
+    <NavbarItem
+      title={$t('sharing')}
+      href={Route.sharing()}
+      icon={mdiAccountMultipleOutline}
+      activeIcon={mdiAccountMultiple}
+    />
+  {/if}
 
   <NavbarGroup title={$t('library')} size="tiny" />
 
@@ -80,7 +90,7 @@
     {/snippet}
   </NavbarItem>
 
-  {#if authManager.preferences.tags.enabled && authManager.preferences.tags.sidebarWeb}
+  {#if features.tags && authManager.preferences.tags.enabled && authManager.preferences.tags.sidebarWeb}
     <NavbarItem title={$t('tags')} href={Route.tags()} icon={{ icon: mdiTagMultipleOutline, flipped: true }} />
   {/if}
 
@@ -92,22 +102,26 @@
     />
   {/if}
 
-  {#if authManager.preferences.folders.enabled && authManager.preferences.folders.sidebarWeb}
+  {#if features.folders && authManager.preferences.folders.enabled && authManager.preferences.folders.sidebarWeb}
     <NavbarItem title={$t('folders')} href={Route.folders()} icon={{ icon: mdiFolderOutline, flipped: true }} />
   {/if}
 
-  <NavbarItem title={$t('utilities')} href={Route.utilities()} icon={mdiToolboxOutline} activeIcon={mdiToolbox} />
+  {#if features.utilities}
+    <NavbarItem title={$t('utilities')} href={Route.utilities()} icon={mdiToolboxOutline} activeIcon={mdiToolbox} />
+  {/if}
 
-  <NavbarItem
-    title={$t('archive')}
-    href={Route.archive()}
-    icon={mdiArchiveArrowDownOutline}
-    activeIcon={mdiArchiveArrowDown}
-  />
+  {#if features.archive}
+    <NavbarItem
+      title={$t('archive')}
+      href={Route.archive()}
+      icon={mdiArchiveArrowDownOutline}
+      activeIcon={mdiArchiveArrowDown}
+    />
+  {/if}
 
   <NavbarItem title={$t('locked_folder')} href={Route.locked()} icon={mdiLockOutline} activeIcon={mdiLock} />
 
-  {#if featureFlagsManager.value.trash}
+  {#if authManager.authenticated && authManager.user.isAdmin && features.trash && featureFlagsManager.value.trash}
     <NavbarItem title={$t('trash')} href={Route.trash()} icon={mdiTrashCanOutline} activeIcon={mdiTrashCan} />
   {/if}
 

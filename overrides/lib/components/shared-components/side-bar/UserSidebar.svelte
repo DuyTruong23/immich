@@ -44,11 +44,11 @@
 <Sidebar ariaLabel={$t('primary')}>
   <NavbarItem title={$t('photos')} href={Route.photos()} icon={mdiImageMultipleOutline} activeIcon={mdiImageMultiple} />
 
-  {#if features.dashboard}
+  {#if features.dashboard && authManager.authenticated && authManager.user.isAdmin}
     <NavbarItem title="Dashboard" href="/dashboard" icon={mdiViewDashboardOutline} />
   {/if}
 
-  {#if features.search && featureFlagsManager.value.search}
+  {#if features.explore && features.search && featureFlagsManager.value.search}
     <NavbarItem title={$t('explore')} href={Route.explore()} icon={mdiMagnify} />
   {/if}
 
@@ -64,7 +64,7 @@
     <NavbarItem title={$t('shared_links')} href={Route.sharedLinks()} icon={mdiLink} />
   {/if}
 
-  {#if features.sharing}
+  {#if features.sharing && authManager.authenticated && authManager.user.isAdmin}
     <NavbarItem
       title={$t('sharing')}
       href={Route.sharing()}
@@ -121,7 +121,7 @@
 
   <NavbarItem title={$t('locked_folder')} href={Route.locked()} icon={mdiLockOutline} activeIcon={mdiLock} />
 
-  {#if features.trash && featureFlagsManager.value.trash}
+  {#if authManager.authenticated && authManager.user.isAdmin && features.trash && featureFlagsManager.value.trash}
     <NavbarItem title={$t('trash')} href={Route.trash()} icon={mdiTrashCanOutline} activeIcon={mdiTrashCan} />
   {/if}
 

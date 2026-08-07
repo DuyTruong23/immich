@@ -23,6 +23,14 @@ export const customViteAliases = (): Record<string, string> => ({
     rootDir,
     'overrides/lib/components/shared-components/side-bar/UserSidebar.svelte',
   ),
+  '$lib/components/shared-components/side-bar/BottomInfo.svelte': path.resolve(
+    rootDir,
+    'overrides/lib/components/shared-components/side-bar/BottomInfo.svelte',
+  ),
+  '$lib/components/layouts/UserPageLayout.svelte': path.resolve(
+    rootDir,
+    'overrides/lib/components/layouts/UserPageLayout.svelte',
+  ),
 });
 
 export const customViteResolve = (): UserConfig['resolve'] => ({
@@ -40,6 +48,10 @@ export const customSvelteKitAliases = (): Record<string, string> => ({
   $overrides: '../../overrides',
   '$lib/components/shared-components/side-bar/UserSidebar.svelte':
     '../../overrides/lib/components/shared-components/side-bar/UserSidebar.svelte',
+  '$lib/components/shared-components/side-bar/BottomInfo.svelte':
+    '../../overrides/lib/components/shared-components/side-bar/BottomInfo.svelte',
+  '$lib/components/layouts/UserPageLayout.svelte':
+    '../../overrides/lib/components/layouts/UserPageLayout.svelte',
 });
 
 export const brandingAssetsDir = path.resolve(rootDir, 'branding/assets');

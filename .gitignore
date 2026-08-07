@@ -38,3 +38,6 @@ coverage/
 
 # Patches applied state
 .patches-applied
+
+.vercel
+.env*
