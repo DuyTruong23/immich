@@ -29,8 +29,11 @@ PUBLIC_DEFAULT_THEME=dark
 
 ## Proxy API
 
-- `api/[...path].ts` — Edge Function proxy mọi REST `/api/*`
-- SPA fallback **không** match `/api` (tránh trả `index.html` thay JSON)
+- `middleware.ts` (root) — Edge Middleware proxy `/api/*` → tunnel (**chạy trước** SPA fallback)
+- `api/[...path].ts` — backup Edge Function (nếu middleware không deploy)
+- SPA fallback **không** match `/api`
+
+Xem thêm [VercelMCP.md](./VercelMCP.md) để debug deploy qua MCP.
 
 ## Immich PC (.env)
 
