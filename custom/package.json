@@ -1,0 +1,19 @@
+{
+  "name": "@photo-gallery/custom",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./api": "./src/api/index.ts",
+    "./api/*": "./src/api/*.ts",
+    "./hooks/*": "./src/hooks/*.ts",
+    "./providers/*": "./src/providers/*.ts",
+    "./types/*": "./src/types/*.ts",
+    "./utils/*": "./src/utils/*.ts"
+  },
+  "dependencies": {
+    "@immich/sdk": "workspace:*",
+    "@photo-gallery/config": "workspace:*"
+  }
+}

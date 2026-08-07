@@ -1,0 +1,12 @@
+@import '@photo-gallery/branding/theme-light.css';
+@import '@photo-gallery/branding/theme-dark.css';
+@import '@photo-gallery/branding/loading.css';
+
+.pg-brand-accent {
+  color: var(--pg-primary);
+}
+
+.pg-brand-surface {
+  background-color: var(--pg-surface);
+  color: var(--pg-text);
+}

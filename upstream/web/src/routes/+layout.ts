@@ -1,0 +1,90 @@
+import { commandPaletteManager } from '@immich/ui';
+import { goto } from '$app/navigation';
+import {
+  PUBLIC_APP_NAME,
+  PUBLIC_COMPANY_NAME,
+  PUBLIC_DEFAULT_LANGUAGE,
+  PUBLIC_DEFAULT_THEME,
+  PUBLIC_ENABLE_ADMIN,
+  PUBLIC_ENABLE_ANALYTICS,
+  PUBLIC_ENABLE_ARCHIVE,
+  PUBLIC_ENABLE_DASHBOARD,
+  PUBLIC_ENABLE_EXPERIMENTAL,
+  PUBLIC_ENABLE_FOLDERS,
+  PUBLIC_ENABLE_MAP,
+  PUBLIC_ENABLE_MEMORIES,
+  PUBLIC_ENABLE_PARTNER,
+  PUBLIC_ENABLE_PEOPLE,
+  PUBLIC_ENABLE_SEARCH,
+  PUBLIC_ENABLE_SHARED_LINKS,
+  PUBLIC_ENABLE_SHARING,
+  PUBLIC_ENABLE_TAGS,
+  PUBLIC_ENABLE_TRASH,
+  PUBLIC_ENABLE_UTILITIES,
+  PUBLIC_ENABLE_WORKFLOWS,
+  PUBLIC_IMMICH_SERVER_URL,
+  PUBLIC_THEME,
+} from '$env/static/public';
+import { bootstrapAppConfig } from '$custom/providers/app-config';
+import { enforceFeatureRoute } from '$custom/hooks/feature-guard';
+import { languageManager } from '$lib/managers/language-manager.svelte';
+import { serverConfigManager } from '$lib/managers/server-config-manager.svelte';
+import { maintenanceCreateUrl, maintenanceReturnUrl, maintenanceShouldRedirect } from '$lib/utils/maintenance';
+import { init } from '$lib/utils/server';
+import type { LayoutLoad } from './$types';
+
+export const ssr = false;
+export const csr = true;
+
+export const load = (async ({ fetch, url }) => {
+  bootstrapAppConfig({
+    PUBLIC_IMMICH_SERVER_URL,
+    PUBLIC_APP_NAME,
+    PUBLIC_COMPANY_NAME,
+    PUBLIC_THEME,
+    PUBLIC_DEFAULT_THEME,
+    PUBLIC_DEFAULT_LANGUAGE,
+    PUBLIC_ENABLE_ANALYTICS,
+    PUBLIC_ENABLE_ADMIN,
+    PUBLIC_ENABLE_EXPERIMENTAL,
+    PUBLIC_ENABLE_MEMORIES,
+    PUBLIC_ENABLE_PARTNER,
+    PUBLIC_ENABLE_SHARING,
+    PUBLIC_ENABLE_MAP,
+    PUBLIC_ENABLE_PEOPLE,
+    PUBLIC_ENABLE_SEARCH,
+    PUBLIC_ENABLE_TRASH,
+    PUBLIC_ENABLE_UTILITIES,
+    PUBLIC_ENABLE_WORKFLOWS,
+    PUBLIC_ENABLE_SHARED_LINKS,
+    PUBLIC_ENABLE_FOLDERS,
+    PUBLIC_ENABLE_TAGS,
+    PUBLIC_ENABLE_ARCHIVE,
+    PUBLIC_ENABLE_DASHBOARD,
+  });
+
+  await enforceFeatureRoute(url.pathname);
+
+  let error;
+  try {
+    await init(fetch);
+
+    if (maintenanceShouldRedirect(serverConfigManager.value.maintenanceMode, url)) {
+      await goto(
+        serverConfigManager.value.maintenanceMode ? maintenanceCreateUrl(url) : maintenanceReturnUrl(url.searchParams),
+      );
+    }
+  } catch (initError) {
+    error = initError;
+  }
+
+  commandPaletteManager.enable();
+  languageManager.init();
+
+  return {
+    error,
+    meta: {
+      title: PUBLIC_APP_NAME || 'Photo Gallery',
+    },
+  };
+}) satisfies LayoutLoad;

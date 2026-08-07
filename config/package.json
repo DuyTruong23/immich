@@ -1,0 +1,17 @@
+{
+  "name": "@photo-gallery/config",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./env": "./src/env.ts",
+    "./features": "./src/features.ts",
+    "./app": "./src/app.ts",
+    "./routes": "./src/routes.ts",
+    "./vite": "./src/vite.integration.ts"
+  },
+  "dependencies": {
+    "@immich/sdk": "workspace:*"
+  }
+}

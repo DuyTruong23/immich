@@ -1,69 +1,11 @@
 packages:
-  - packages/**
-  - docs
-  - e2e
-  - i18n
-  - server
-  - plugins
-  - web
-  - .github
-  - packages/*
-allowBuilds:
-  '@nestjs/core': false
-  '@parcel/watcher': false
-  '@scarf/scarf': false
-  '@swc/core': false
-  bcrypt: true
-  canvas: false
-  core-js: false
-  cpu-features: false
-  es5-ext: false
-  esbuild: false
-  msgpackr-extract: false
-  protobufjs: false
-  sharp: true
-  ssh2: false
-  utimes: false
-  '@tailwindcss/oxide': true
-  core-js-pure: false
-  postman-code-generators: false
-overrides:
-  canvas: 3.2.3
-  sharp: ^0.34.5
-packageExtensions:
-  nestjs-kysely:
-    dependencies:
-      tslib: '*'
-  nestjs-otel:
-    dependencies:
-      tslib: '*'
-  '@photo-sphere-viewer/equirectangular-video-adapter':
-    dependencies:
-      three: '*'
-  '@photo-sphere-viewer/video-plugin':
-    dependencies:
-      three: '*'
-  sharp:
-    dependencies:
-      node-addon-api: '*'
-      node-gyp: '*'
-  '@immich/ui':
-    dependencies:
-      tailwindcss: '>=4.1'
-  tailwind-variants:
-    dependencies:
-      tailwindcss: '>=4.1'
-  bcrypt:
-    dependencies:
-      node-addon-api: '*'
-      node-gyp: '*'
-  '@nestjs/swagger':
-    peerDependencies:
-      typescript: '*'
-dedupePeerDependents: false
+  - upstream/web
+  - upstream/packages/*
+  - config
+  - branding
+  - custom
+  - overrides
+
 preferWorkspacePackages: true
 injectWorkspacePackages: true
-shamefullyHoist: false
-verifyDepsBeforeRun: install
-minimumReleaseAgeExclude:
-  - '@immich/ui@0.83.0'
+verifyDepsBeforeRun: false

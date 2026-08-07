@@ -1,0 +1,34 @@
+# {$DOMAIN} — reverse proxy cho Immich + custom frontend
+#
+# Khuyến nghị production: frontend và API cùng origin
+# Frontend static: Vercel hoặc file_server
+# API + WebSocket: Immich :2283
+
+{$DOMAIN} {
+  # Frontend (Vercel) — hoặc thay bằng file_server nếu self-host static
+  @frontend not path /api/* /.well-known/immich /custom.css /socket.io/*
+  reverse_proxy @frontend https://your-app.vercel.app
+
+  # Immich REST API
+  handle /api/* {
+    reverse_proxy immich-server:2283
+  }
+
+  # Immich WebSocket
+  handle /api/socket.io/* {
+    reverse_proxy immich-server:2283
+  }
+
+  # Server custom CSS
+  handle /custom.css {
+    reverse_proxy immich-server:2283
+  }
+
+  # Well-known
+  handle /.well-known/immich {
+    reverse_proxy immich-server:2283
+  }
+}
+
+# Immich backend chạy trong Docker network
+# immich-server: container name hoặc host IP

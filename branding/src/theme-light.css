@@ -1,0 +1,14 @@
+:root {
+  --pg-primary: #2563eb;
+  --pg-primary-hover: #1d4ed8;
+  --pg-surface: #ffffff;
+  --pg-surface-muted: #f8fafc;
+  --pg-text: #0f172a;
+  --pg-text-muted: #64748b;
+  --pg-border: #e2e8f0;
+  --pg-loading-bg: #ffffff;
+}
+
+html.light {
+  --immich-primary: var(--pg-primary);
+}
