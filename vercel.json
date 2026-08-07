@@ -18,5 +18,22 @@
       "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
     }
   ],
-  "rewrites": [{ "source": "/((?!assets/).*)", "destination": "/index.html" }]
+  "rewrites": [
+    {
+      "source": "/api/:match*",
+      "destination": "https://immich.gallery-app.pp.ua/api/:match*"
+    },
+    {
+      "source": "/.well-known/immich",
+      "destination": "https://immich.gallery-app.pp.ua/.well-known/immich"
+    },
+    {
+      "source": "/custom.css",
+      "destination": "https://immich.gallery-app.pp.ua/custom.css"
+    },
+    {
+      "source": "/((?!assets/).*)",
+      "destination": "/index.html"
+    }
+  ]
 }
