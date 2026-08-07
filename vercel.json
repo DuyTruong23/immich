@@ -4,11 +4,6 @@
   "buildCommand": "pnpm build",
   "outputDirectory": "upstream/web/build",
   "framework": null,
-  "functions": {
-    "api/**/*.ts": {
-      "runtime": "edge"
-    }
-  },
   "headers": [
     {
       "source": "/(.*)",
@@ -24,6 +19,10 @@
     }
   ],
   "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "https://immich.gallery-app.pp.ua/api/$1"
+    },
     {
       "source": "/((?!api(?:/|$)|assets/|_app/|favicon|service-worker|manifest\\.json|custom\\.css|.*\\..*).*)",
       "destination": "/index.html"
