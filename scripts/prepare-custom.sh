@@ -23,5 +23,6 @@ echo "==> Copy branding assets"
 mkdir -p upstream/web/static/branding
 copy_merge "branding/assets/" "upstream/web/static/branding/"
 cp branding/assets/manifest.json upstream/web/static/manifest.json
+cp custom/src/styles/custom.css upstream/web/static/custom.css
 
 echo "Custom layer prepared."

@@ -1,10 +1,11 @@
 # Production — Vercel + Cloudflare Tunnel (gallery-app.pp.ua)
 
-## Kiến trúc (same-origin qua Vercel proxy)
+## Kiến trúc (same-origin)
 
 ```
-Browser → gallery-app.pp.ua/api/*  → Vercel rewrite → immich.gallery-app.pp.ua (PC tunnel)
-Browser → gallery-app.pp.ua/*      → Vercel static (custom UI)
+Browser → gallery-app.pp.ua/api/*       → Vercel Edge Function → immich.gallery-app.pp.ua (PC tunnel)
+Browser → gallery-app.pp.ua/api/socket.io → Vercel rewrite → tunnel (WebSocket)
+Browser → gallery-app.pp.ua/*           → Vercel static (custom UI)
 ```
 
 **Không dùng cross-origin** — tránh CORS (Immich không hỗ trợ CORS native).
@@ -15,21 +16,21 @@ Browser → gallery-app.pp.ua/*      → Vercel static (custom UI)
 # ĐỂ TRỐNG — SDK dùng relative /api (cùng origin)
 PUBLIC_IMMICH_SERVER_URL=
 
+# Server-side — Edge Function proxy (không PUBLIC)
+IMMICH_SERVER_URL=https://immich.gallery-app.pp.ua
+
 PUBLIC_APP_NAME=Photo Gallery
 PUBLIC_DEFAULT_LANGUAGE=vi
 PUBLIC_THEME=system
 PUBLIC_DEFAULT_THEME=dark
 ```
 
-> **Quan trọng:** Xóa hoặc để trống `PUBLIC_IMMICH_SERVER_URL` trên Vercel, rồi **Redeploy**.
+> **Quan trọng:** Xóa hoặc để trống `PUBLIC_IMMICH_SERVER_URL`, thêm `IMMICH_SERVER_URL`, rồi **Redeploy**.
 
-## vercel.json
+## Proxy API
 
-Proxy target trong `rewrites` phải khớp tunnel Immich:
-
-```json
-"destination": "https://immich.gallery-app.pp.ua/api/:match*"
-```
+- `api/[...path].ts` — Edge Function proxy mọi REST `/api/*`
+- SPA fallback **không** match `/api` (tránh trả `index.html` thay JSON)
 
 ## Immich PC (.env)
 
@@ -40,12 +41,13 @@ IMMICH_SERVER_URL=https://immich.gallery-app.pp.ua
 ## Kiểm tra
 
 ```bash
-# Qua Vercel proxy (same-origin)
-curl https://gallery-app.pp.ua/api/server/ping
-# → {"res":"pong"}
+curl -sS https://gallery-app.pp.ua/api/server/ping
+# → {"res":"pong"}  (Content-Type: application/json — KHÔNG phải HTML)
 
-# Tunnel trực tiếp
-curl https://immich.gallery-app.pp.ua/api/server/ping
+curl -sS https://gallery-app.pp.ua/api/server/config | head -c 80
+# → JSON config
+
+curl -sS https://immich.gallery-app.pp.ua/api/server/ping
 # → {"res":"pong"}
 ```
 
@@ -54,6 +56,7 @@ curl https://immich.gallery-app.pp.ua/api/server/ping
 | Nguyên nhân | Fix |
 |---|---|
 | `PUBLIC_IMMICH_SERVER_URL` set → cross-origin CORS | Để **trống** trên Vercel |
+| `/api/*` trả HTML (SPA fallback) | Deploy bản mới có `api/[...path].ts` + vercel.json đã sửa |
 | Chưa redeploy sau đổi env | Redeploy |
 | Tunnel/Immich down | `docker compose ps` trên PC |
-| Sai URL trong vercel.json rewrites | Khớp `immich.gallery-app.pp.ua` |
+| Thiếu `IMMICH_SERVER_URL` | Set trên Vercel (server env) |

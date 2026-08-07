@@ -20,19 +20,11 @@
   ],
   "rewrites": [
     {
-      "source": "/api/:match*",
-      "destination": "https://immich.gallery-app.pp.ua/api/:match*"
+      "source": "/api/socket.io/:path*",
+      "destination": "https://immich.gallery-app.pp.ua/api/socket.io/:path*"
     },
     {
-      "source": "/.well-known/immich",
-      "destination": "https://immich.gallery-app.pp.ua/.well-known/immich"
-    },
-    {
-      "source": "/custom.css",
-      "destination": "https://immich.gallery-app.pp.ua/custom.css"
-    },
-    {
-      "source": "/((?!assets/).*)",
+      "source": "/((?!api(?:/|$)|assets/|_app/|favicon|service-worker|manifest\\.json|custom\\.css|.*\\..*).*)",
       "destination": "/index.html"
     }
   ]
