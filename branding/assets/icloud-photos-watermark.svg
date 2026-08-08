@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 792 792" role="img" aria-hidden="true">
+  <g transform="translate(396 396)">
+    <path fill="#ff3b30" opacity="0.85" d="M0-220c73 49 122 134 122 220s-49 171-122 220c-12-85 12-171 0-220s-12-135 0-220z"/>
+    <path fill="#ff9500" opacity="0.85" d="M0-220c73 49 122 134 122 220s-49 171-122 220c-12-85 12-171 0-220s-12-135 0-220z" transform="rotate(45)"/>
+    <path fill="#ffcc00" opacity="0.85" d="M0-220c73 49 122 134 122 220s-49 171-122 220c-12-85 12-171 0-220s-12-135 0-220z" transform="rotate(90)"/>
+    <path fill="#34c759" opacity="0.85" d="M0-220c73 49 122 134 122 220s-49 171-122 220c-12-85 12-171 0-220s-12-135 0-220z" transform="rotate(135)"/>
+    <path fill="#00c7be" opacity="0.85" d="M0-220c73 49 122 134 122 220s-49 171-122 220c-12-85 12-171 0-220s-12-135 0-220z" transform="rotate(180)"/>
+    <path fill="#007aff" opacity="0.85" d="M0-220c73 49 122 134 122 220s-49 171-122 220c-12-85 12-171 0-220s-12-135 0-220z" transform="rotate(225)"/>
+    <path fill="#5856d6" opacity="0.85" d="M0-220c73 49 122 134 122 220s-49 171-122 220c-12-85 12-171 0-220s-12-135 0-220z" transform="rotate(270)"/>
+    <path fill="#af52de" opacity="0.85" d="M0-220c73 49 122 134 122 220s-49 171-122 220c-12-85 12-171 0-220s-12-135 0-220z" transform="rotate(315)"/>
+    <circle r="68" fill="none"/>
+  </g>
+</svg>

@@ -1,6 +1,6 @@
 {
-  "name": "Photo Gallery",
-  "short_name": "Gallery",
+  "name": "iCloud Photos",
+  "short_name": "Photos",
   "description": "Custom Immich photo gallery frontend",
   "start_url": "/",
   "display": "standalone",

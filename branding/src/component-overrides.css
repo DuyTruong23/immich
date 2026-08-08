@@ -108,11 +108,71 @@
     border-radius: var(--borderRadiusLarge) !important;
     border: 1px solid var(--ant-border) !important;
     box-shadow: var(--ant-box-shadow) !important;
-    background-color: var(--colorNeutralBackground1) !important;
+    background-color: var(--colorNeutralCardBackground) !important;
+    color: var(--colorNeutralForeground1) !important;
+  }
+
+  .fluent-auth-page {
+    background-color: var(--colorNeutralBackground2);
+    color: var(--colorNeutralForeground1);
   }
 
   .fluent-auth-backdrop {
     background-color: color-mix(in srgb, var(--colorNeutralBackground2) 80%, transparent) !important;
+  }
+
+  .fluent-auth-card__title {
+    color: var(--colorNeutralForeground1) !important;
+    text-align: center;
+  }
+
+  .fluent-auth-card__body {
+    color: var(--colorNeutralForeground1);
+  }
+
+  /* Fix @immich/ui dark-mode tokens bleeding onto auth card */
+  .fluent-auth-card :global(.dark\:text-white),
+  .fluent-auth-card :global(.text-dark) {
+    color: var(--colorNeutralForeground1) !important;
+  }
+
+  .fluent-auth-card :global(label),
+  .fluent-auth-card :global([class*='Label']) {
+    color: var(--colorNeutralForeground2) !important;
+  }
+
+  .fluent-auth-card :global(input:not([type='checkbox']):not([type='radio'])) {
+    background: transparent !important;
+    color: var(--colorNeutralForeground1) !important;
+  }
+
+  .fluent-auth-card :global(div:has(> input)),
+  .fluent-auth-card :global(div:has(> button[aria-label*='password' i])),
+  .fluent-auth-card :global([class*='ring-gray']) {
+    background-color: var(--colorNeutralBackground1) !important;
+    border: 1px solid var(--ant-border) !important;
+    border-radius: var(--borderRadiusMedium) !important;
+    box-shadow: none !important;
+    --tw-ring-color: transparent !important;
+  }
+
+  .fluent-auth-card :global(div:has(> input):focus-within),
+  .fluent-auth-card :global(div:has(> button[aria-label*='password' i]):focus-within) {
+    border-color: var(--ant-color-primary) !important;
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--ant-color-primary) 20%, transparent) !important;
+  }
+
+  .fluent-auth-card :global(hr),
+  .fluent-auth-card :global(.bg-\(--fluent-stroke-2\)) {
+    background-color: var(--ant-border) !important;
+  }
+
+  .fluent-auth-card :global(.bg-\(--fluent-bg-2\)) {
+    background-color: var(--colorNeutralCardBackground) !important;
+  }
+
+  .fluent-auth-card :global(.text-\(--fluent-fg-2\)) {
+    color: var(--colorNeutralForeground3) !important;
   }
 
   .fluent-setting-accordion {

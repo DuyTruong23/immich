@@ -37,4 +37,23 @@ if [ -f custom/src/hooks.server.ts ]; then
   cp custom/src/hooks.server.ts upstream/web/src/hooks.server.ts
 fi
 
+if [ -f custom/src/hooks.client.ts ]; then
+  echo "==> Apply custom hooks.client.ts"
+  cp custom/src/hooks.client.ts upstream/web/src/hooks.client.ts
+fi
+
+echo "==> Patch favicon branding"
+APP_HTML="$ROOT/upstream/web/src/app.html"
+if [ -f "$APP_HTML" ] && ! grep -q "icloud-photos-icon.svg" "$APP_HTML"; then
+  sed -i 's|<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />|<link rel="icon" type="image/svg+xml" href="/branding/icloud-photos-icon.svg" />\n    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />|' "$APP_HTML" 2>/dev/null \
+    || sed -i '' 's|<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />|<link rel="icon" type="image/svg+xml" href="/branding/icloud-photos-icon.svg" />\n    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />|' "$APP_HTML"
+  sed -i 's|href="/apple-icon-180.png"|href="/branding/icloud-photos-icon.svg"|' "$APP_HTML" 2>/dev/null \
+    || sed -i '' 's|href="/apple-icon-180.png"|href="/branding/icloud-photos-icon.svg"|' "$APP_HTML"
+fi
+
+echo "==> Patch tab title branding"
+# shellcheck source=/dev/null
+source "$ROOT/custom/patches/layout-title.sh"
+apply_layout_title_patch "$ROOT/upstream/web/src/routes/+layout.svelte"
+
 echo "Custom layer prepared."

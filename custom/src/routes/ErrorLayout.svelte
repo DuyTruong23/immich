@@ -2,6 +2,7 @@
   import ServerConnectionErrorPage from '$custom/components/ServerConnectionErrorPage.svelte';
   import { isServerConnectionError } from '$custom/utils/server-connection-error';
   import { copyToClipboard } from '$lib/utils';
+  import BrandLogo from '$lib/components/shared-components/BrandLogo.svelte';
   import {
     Card,
     CardBody,
@@ -11,7 +12,6 @@
     Icon,
     IconButton,
     Link,
-    Logo,
     Text,
     VStack,
   } from '@immich/ui';
@@ -48,7 +48,7 @@
     <section>
       <div class="flex place-items-center border-b px-6 py-4 dark:border-b-immich-dark-gray">
         <Link href="/photos">
-          <Logo variant="inline" />
+          <BrandLogo variant="inline" />
         </Link>
       </div>
     </section>
