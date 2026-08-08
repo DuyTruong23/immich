@@ -155,16 +155,16 @@
           <PasswordInput id="password" bind:value={password} autocomplete="current-password" />
         </Field>
 
-        <Button type="submit" size="large" shape="round" fullWidth {loading} class="mt-6">{$t('to_login')}</Button>
+        <Button type="submit" size="large" shape="rectangle" fullWidth {loading} class="mt-6">{$t('to_login')}</Button>
       </form>
     {/if}
 
     {#if featureFlagsManager.value.oauth}
       {#if featureFlagsManager.value.passwordLogin}
         <div class="my-4 inline-flex w-full items-center justify-center">
-          <hr class="my-4 h-px w-3/4 border-0 bg-gray-200 dark:bg-gray-600" />
+          <hr class="my-4 h-px w-3/4 border-0 bg-(--fluent-stroke-2)" />
           <span
-            class="absolute inset-s-1/2 -translate-x-1/2 bg-gray-50 px-3 font-medium text-gray-900 uppercase dark:bg-neutral-900 dark:text-white"
+            class="absolute inset-s-1/2 -translate-x-1/2 bg-(--fluent-bg-2) px-3 text-xs font-medium text-(--fluent-fg-2) uppercase"
           >
             {$t('or')}
           </span>
@@ -174,7 +174,7 @@
         <Alert color="danger" title={oauthError} closable />
       {/if}
       <Button
-        shape="round"
+        shape="rectangle"
         loading={loading || oauthLoading}
         disabled={loading || oauthLoading}
         size="large"

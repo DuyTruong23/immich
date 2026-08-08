@@ -1,26 +1,45 @@
+@import '../../../branding/src/fonts.css';
+@import '../../../branding/src/fluent-tokens.css';
 @import '../../../branding/src/theme-light.css';
 @import '../../../branding/src/theme-dark.css';
+@import '../../../branding/src/immich-bridge.css';
+@import '../../../branding/src/typography.css';
+@import '../../../branding/src/fluent/globals.css';
+@import '../../../branding/src/fluent/shell.css';
+@import '../../../branding/src/fluent/primitives.css';
+@import '../../../branding/src/fluent/navigation.css';
+@import '../../../branding/src/fluent/timeline.css';
+@import '../../../branding/src/fluent/viewer.css';
+@import '../../../branding/src/fluent/forms.css';
+@import '../../../branding/src/fluent/search-filter.css';
+@import '../../../branding/src/fluent/admin.css';
+@import '../../../branding/src/fluent/responsive.css';
+@import '../../../branding/src/component-overrides.css';
 @import '../../../branding/src/loading.css';
 
+.fluent-brand-accent,
 .pg-brand-accent {
-  color: var(--pg-primary);
+  color: var(--colorBrandForeground1);
 }
 
+.fluent-brand-surface,
 .pg-brand-surface {
-  background-color: var(--pg-surface);
-  color: var(--pg-text);
+  background-color: var(--colorNeutralBackground1);
+  color: var(--colorNeutralForeground1);
 }
 
+.fluent-server-error,
 .pg-server-error {
   display: flex;
   min-height: 100dvh;
   width: 100%;
   align-items: center;
   justify-content: center;
-  background: #24104f;
-  padding: 1rem;
+  background: var(--colorNeutralBackground2, #f5f5f5);
+  padding: var(--spacingHorizontalL);
 }
 
+.fluent-server-error__scene,
 .pg-server-error__scene {
   width: min(960px, 100%);
   height: auto;

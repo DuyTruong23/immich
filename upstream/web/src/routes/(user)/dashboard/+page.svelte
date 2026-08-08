@@ -22,10 +22,10 @@
   const { publicEnv } = getAppConfig();
 
   const statCards = $derived([
-    { label: 'Ảnh', value: data.photoCount.toLocaleString('vi-VN'), icon: mdiImageMultipleOutline, tone: 'sky' },
-    { label: 'Video', value: data.videoCount.toLocaleString('vi-VN'), icon: mdiVideoOutline, tone: 'violet' },
-    { label: 'Albums', value: data.albumCount.toLocaleString('vi-VN'), icon: mdiImageAlbum, tone: 'amber' },
-    { label: 'Phiên bản', value: `v${data.serverVersion}`, icon: mdiCheckCircle, tone: 'emerald' },
+    { label: 'Ảnh', value: data.photoCount.toLocaleString('vi-VN'), icon: mdiImageMultipleOutline, tone: 'brand' },
+    { label: 'Video', value: data.videoCount.toLocaleString('vi-VN'), icon: mdiVideoOutline, tone: 'info' },
+    { label: 'Albums', value: data.albumCount.toLocaleString('vi-VN'), icon: mdiImageAlbum, tone: 'warning' },
+    { label: 'Phiên bản', value: `v${data.serverVersion}`, icon: mdiCheckCircle, tone: 'success' },
   ]);
 
   const quickLinks = [
@@ -36,19 +36,17 @@
   ];
 
   const toneClass: Record<string, string> = {
-    sky: 'bg-sky-500/10 text-sky-400',
-    violet: 'bg-violet-500/10 text-violet-400',
-    amber: 'bg-amber-500/10 text-amber-400',
-    emerald: 'bg-emerald-500/10 text-emerald-400',
+    brand: 'fluent-badge--brand',
+    info: 'fluent-badge--brand',
+    warning: 'fluent-badge--warning',
+    success: 'fluent-badge--success',
   };
 </script>
 
 <UserPageLayout title={data.meta.title} description={publicEnv.companyName || 'Quản trị hệ thống'}>
   {#snippet buttons()}
     <div
-      class="inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-sm {data.serverOnline
-        ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-400'
-        : 'border-red-500/30 bg-red-500/10 text-red-400'}"
+      class="fluent-badge {data.serverOnline ? 'fluent-badge--success' : 'fluent-badge--danger'}"
     >
       <Icon icon={data.serverOnline ? mdiCheckCircle : mdiServerOff} size="16" />
       {data.serverOnline ? 'Server online' : 'Server offline'}
@@ -56,62 +54,62 @@
   {/snippet}
 
   <div class="mx-auto max-w-6xl px-2 pb-8 md:px-4">
-    <p class="mb-6 text-sm text-(--pg-text-muted)">Tổng quan thư viện — chỉ dành cho admin</p>
+    <p class="mb-6 text-sm text-(--fluent-fg-3)">Tổng quan thư viện — chỉ dành cho admin</p>
 
     <section class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
       {#each statCards as card (card.label)}
-        <article class="rounded-2xl border border-(--pg-border) bg-(--pg-surface-raised, transparent) p-5">
+        <article class="fluent-card">
           <div class="mb-3 flex items-center justify-between gap-3">
-            <h2 class="text-sm font-medium text-(--pg-text-muted)">{card.label}</h2>
-            <span class="inline-flex rounded-lg p-2 {toneClass[card.tone]}">
+            <h2 class="text-sm font-medium text-(--fluent-fg-3)">{card.label}</h2>
+            <span class="fluent-badge {toneClass[card.tone]}">
               <Icon icon={card.icon} size="20" />
             </span>
           </div>
-          <p class="text-3xl font-semibold tracking-tight">{card.value}</p>
+          <p class="text-3xl font-semibold tracking-tight text-(--fluent-fg-1)">{card.value}</p>
         </article>
       {/each}
     </section>
 
     <section class="mt-6 grid gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
-      <article class="rounded-2xl border border-(--pg-border) p-6">
+      <article class="fluent-card">
         <div class="mb-4 flex items-end justify-between gap-4">
           <div>
-            <h2 class="text-lg font-semibold">Dung lượng lưu trữ</h2>
-            <p class="mt-1 text-sm text-(--pg-text-muted)">
+            <h2 class="text-lg font-semibold text-(--fluent-fg-1)">Dung lượng lưu trữ</h2>
+            <p class="mt-1 text-sm text-(--fluent-fg-3)">
               {data.storageUsedLabel} / {data.storageTotalLabel}
               ({data.storagePercent}%)
             </p>
           </div>
-          <p class="text-sm text-(--pg-text-muted)">Media: {data.mediaUsageGiB}</p>
+          <p class="text-sm text-(--fluent-fg-3)">Media: {data.mediaUsageGiB}</p>
         </div>
 
-        <div class="h-3 overflow-hidden rounded-full bg-(--pg-border)">
+        <div class="h-2 overflow-hidden rounded-full bg-(--fluent-stroke-1)">
           <div
-            class="h-full rounded-full transition-all {data.storagePercent >= 95
-              ? 'bg-red-500'
+            class="h-full rounded-full transition-all duration-200 {data.storagePercent >= 95
+              ? 'bg-(--fluent-danger)'
               : data.storagePercent >= 80
-                ? 'bg-amber-500'
-                : 'bg-(--pg-primary)'}"
+                ? 'bg-(--fluent-warning)'
+                : 'bg-(--fluent-brand)'}"
             style="width: {Math.min(data.storagePercent, 100)}%"
           ></div>
         </div>
 
-        <div class="mt-3 flex justify-between text-xs text-(--pg-text-muted)">
+        <div class="mt-3 flex justify-between text-xs text-(--fluent-fg-3)">
           <span>{data.storageUsedGiB} đã dùng</span>
           <span>{data.storageTotalGiB} tổng</span>
         </div>
       </article>
 
-      <article class="rounded-2xl border border-(--pg-border) p-6">
-        <h2 class="text-lg font-semibold">Truy cập nhanh</h2>
-        <p class="mt-1 mb-4 text-sm text-(--pg-text-muted)">Đi tới các khu vực chính của thư viện</p>
+      <article class="fluent-card">
+        <h2 class="text-lg font-semibold text-(--fluent-fg-1)">Truy cập nhanh</h2>
+        <p class="mt-1 mb-4 text-sm text-(--fluent-fg-3)">Đi tới các khu vực chính của thư viện</p>
 
         <nav class="grid gap-2">
           {#each quickLinks as link (link.href)}
             <a
-              class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm transition-colors {link.primary
-                ? 'bg-(--pg-primary) text-white hover:bg-(--pg-primary-hover)'
-                : 'border border-(--pg-border) hover:bg-(--pg-border)/40'}"
+              class="fluent-control flex items-center gap-3 px-4 py-3 {link.primary
+                ? 'fluent-control--primary'
+                : 'fluent-control--secondary'}"
               href={link.href}
             >
               <Icon icon={link.icon} size="20" />

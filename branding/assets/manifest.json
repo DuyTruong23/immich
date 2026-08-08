@@ -4,8 +4,8 @@
   "description": "Custom Immich photo gallery frontend",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0f172a",
-  "theme_color": "#2563eb",
+  "background_color": "#ffffff",
+  "theme_color": "#1677ff",
   "icons": [
     {
       "src": "/branding/icon-192.png",

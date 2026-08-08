@@ -15,4 +15,4 @@ until wget --spider --quiet "${UPSTREAM}/api/server/config" > /dev/null 2>&1; do
     sleep 1
 done
 echo "Connected to $UPSTREAM, starting Immich Web..."
-pnpm --filter immich-web exec vite dev --host 0.0.0.0 --port 3030
+pnpm --filter immich-web exec vite dev --host 0.0.0.0 --port 5002

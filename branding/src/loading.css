@@ -1,20 +1,18 @@
-#stencil {
-  --stencil-width: 120px;
+/*
+ * Ant Design 6.5.4 — loading indicator
+ */
+
+.pg-loading-logo path,
+.fluent-loading-logo path {
+  fill: var(--colorBrandBackground, var(--ant-color-primary, #1677ff));
 }
 
-#stencil svg .st0 {
-  fill: var(--pg-primary, #2563eb);
+.pg-loading-bg,
+.fluent-loading-bg {
+  background: var(--pg-loading-bg, var(--colorNeutralBackground1));
 }
 
-#stencil svg .st1,
-#stencil svg .st2,
-#stencil svg .st3,
-#stencil svg .st4 {
-  fill: var(--pg-primary, #2563eb);
-  opacity: 0.85;
-}
-
-html.dark #stencil,
-html.light #stencil {
-  background-color: var(--pg-loading-bg);
+.pg-loading-spinner,
+.fluent-loading-spinner {
+  fill: var(--colorBrandBackground, var(--ant-color-primary, #1677ff));
 }

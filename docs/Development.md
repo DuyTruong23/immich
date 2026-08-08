@@ -24,7 +24,7 @@ cp .env.example upstream/web/.env
 ```
 Immich Docker (:2283)
        ↓ proxy
-Custom Frontend (:3030, hot reload)
+Custom Frontend (:5002, hot reload)
 ```
 
 ### Một lệnh
@@ -47,7 +47,7 @@ pnpm dev
 
 | URL | Service |
 |---|---|
-| http://localhost:3030 | Custom frontend (Vite HMR) |
+| http://localhost:5002 | Custom frontend (Vite HMR) |
 | http://localhost:2283 | Immich API trực tiếp |
 
 Vite proxy forward `/api`, `/.well-known/immich`, `/custom.css`, WebSocket tới `IMMICH_SERVER_URL`.

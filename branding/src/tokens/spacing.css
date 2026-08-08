@@ -1,0 +1,39 @@
+/*
+ * Fluent 2 — Spacing tokens (4px grid)
+ */
+
+:root {
+  --spacingHorizontalNone: 0;
+  --spacingHorizontalXXS: 2px;
+  --spacingHorizontalXS: 4px;
+  --spacingHorizontalS: 8px;
+  --spacingHorizontalM: 12px;
+  --spacingHorizontalL: 16px;
+  --spacingHorizontalXL: 20px;
+  --spacingHorizontalXXL: 24px;
+  --spacingHorizontalXXXL: 32px;
+
+  --spacingVerticalNone: 0;
+  --spacingVerticalXXS: 2px;
+  --spacingVerticalXS: 4px;
+  --spacingVerticalS: 8px;
+  --spacingVerticalM: 12px;
+  --spacingVerticalL: 16px;
+  --spacingVerticalXL: 20px;
+  --spacingVerticalXXL: 24px;
+  --spacingVerticalXXXL: 32px;
+
+  /* Extended scale for layout */
+  --spacing2: 2px;
+  --spacing4: 4px;
+  --spacing6: 6px;
+  --spacing8: 8px;
+  --spacing12: 12px;
+  --spacing16: 16px;
+  --spacing20: 20px;
+  --spacing24: 24px;
+  --spacing32: 32px;
+  --spacing40: 40px;
+  --spacing48: 48px;
+  --spacing64: 64px;
+}

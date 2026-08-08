@@ -1,0 +1,10 @@
+/*
+ * Be Vietnam Pro typography — complements globals.css
+ */
+
+@layer base {
+  :root {
+    --font-sans: var(--fontFamilyBase);
+    --font-mono: var(--fontFamilyMonospace);
+  }
+}

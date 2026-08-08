@@ -5,7 +5,11 @@ import { svelteTesting } from '@testing-library/svelte/vite';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { defineConfig, type ProxyOptions, type UserConfig } from 'vite';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { customViteAliases, resolveImmichServerUrl } from '../../config/src/vite.integration.ts';
+
+const viteDir = path.dirname(fileURLToPath(import.meta.url));
+const isWindows = process.platform === 'win32';
 
 const upstream = {
   target: resolveImmichServerUrl(),
@@ -30,7 +34,7 @@ export default defineConfig({
       ...customViteAliases(),
       'xmlhttprequest-ssl': './node_modules/engine.io-client/lib/xmlhttprequest.js',
       // eslint-disable-next-line unicorn/prefer-module
-      '@test-data': path.resolve(__dirname, './src/test-data'),
+      '@test-data': path.resolve(viteDir, './src/test-data'),
       // '@immich/ui': path.resolve(__dirname, '../../ui/packages/ui'),
     },
   },
@@ -38,6 +42,14 @@ export default defineConfig({
     // connect to a remote backend during web-only development
     proxy,
     allowedHosts: true,
+    ...(isWindows
+      ? {
+          watch: {
+            usePolling: true,
+            interval: 500,
+          },
+        }
+      : {}),
   },
   preview: {
     proxy,

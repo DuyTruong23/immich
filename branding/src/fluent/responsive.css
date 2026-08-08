@@ -1,0 +1,60 @@
+/*
+ * Fluent 2 — Responsive layout & touch targets
+ */
+
+@layer utilities {
+  /* Minimum touch target for interactive controls */
+  @media (pointer: coarse) {
+    button:not([disabled]),
+    [role='button']:not([disabled]),
+    a[role='menuitem'],
+    .fluent-control {
+      min-height: 44px;
+    }
+
+    #dashboard-navbar button,
+    #sidebar a {
+      min-height: 44px;
+    }
+  }
+
+  /* Prevent horizontal overflow */
+  html,
+  body {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+
+  /* Main content padding — mobile edge-to-edge photos */
+  @media (max-width: 639px) {
+    main .overflow-y-auto.p-2 {
+      padding-inline: var(--spacingHorizontalXS);
+    }
+  }
+
+  @media (min-width: 640px) {
+    main .overflow-y-auto.p-2 {
+      padding-inline: var(--spacingHorizontalS);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    main .overflow-y-auto.p-2 {
+      padding-inline: var(--spacingHorizontalL);
+    }
+  }
+
+  /* Dialog responsive — prevent clipping */
+  [role='dialog'] {
+    max-width: min(calc(100vw - var(--spacingHorizontalXXL)), 560px);
+    border-radius: var(--borderRadiusXLarge);
+    box-shadow: var(--shadow28);
+  }
+
+  @media (max-width: 639px) {
+    [role='dialog'] {
+      max-width: calc(100vw - var(--spacingHorizontalL));
+      margin: var(--spacingVerticalS);
+    }
+  }
+}
