@@ -10,3 +10,19 @@
   background-color: var(--pg-surface);
   color: var(--pg-text);
 }
+
+.pg-server-error {
+  display: flex;
+  min-height: 100dvh;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  background: #24104f;
+  padding: 1rem;
+}
+
+.pg-server-error__scene {
+  width: min(960px, 100%);
+  height: auto;
+  max-height: calc(100dvh - 2rem);
+}

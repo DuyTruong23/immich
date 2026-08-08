@@ -29,6 +29,7 @@ import {
 } from '$env/static/public';
 import { bootstrapAppConfig } from '$custom/providers/app-config';
 import { enforceFeatureRoute } from '$custom/hooks/feature-guard';
+import { createServerConnectionError, isServerConnectionError } from '$custom/utils/server-connection-error';
 import { languageManager } from '$lib/managers/language-manager.svelte';
 import { serverConfigManager } from '$lib/managers/server-config-manager.svelte';
 import { maintenanceCreateUrl, maintenanceReturnUrl, maintenanceShouldRedirect } from '$lib/utils/maintenance';
@@ -79,7 +80,11 @@ export const load = (async ({ fetch, url }) => {
       );
     }
   } catch (initError) {
-    error = initError;
+    if (isServerConnectionError(initError)) {
+      error = createServerConnectionError(initError);
+    } else {
+      error = initError;
+    }
   }
 
   commandPaletteManager.enable();

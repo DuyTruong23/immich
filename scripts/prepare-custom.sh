@@ -30,6 +30,8 @@ cp branding/src/theme-light.css upstream/web/static/branding/theme-light.css
 cp branding/src/theme-dark.css upstream/web/static/branding/theme-dark.css
 cp branding/src/loading.css upstream/web/static/branding/loading.css
 cp branding/assets/manifest.json upstream/web/static/manifest.json
-sed 's|@photo-gallery/branding/|/branding/|g' custom/src/styles/custom.css > upstream/web/static/custom.css
+sed -e 's|@photo-gallery/branding/|/branding/|g' \
+  -e "s|@import '../../../branding/src/|@import '/branding/|g" \
+  custom/src/styles/custom.css > upstream/web/static/custom.css
 
 echo "Custom layer prepared."

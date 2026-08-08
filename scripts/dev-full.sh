@@ -8,5 +8,5 @@ bash scripts/docker-up.sh
 
 echo ""
 echo "==> Starting custom frontend (hot reload)"
-echo "    http://localhost:3000 → proxy → http://localhost:2283"
+echo "    http://localhost:3030 → proxy → http://localhost:2283"
 pnpm dev
