@@ -55,8 +55,9 @@
 </script>
 
 <div
-  class="fluent-setting-accordion"
-  data-open={isOpen ? 'true' : 'false'}
+  class="mt-4 rounded-2xl border-2 border-primary/20 px-6 py-4 transition-all {isOpen
+    ? 'border-primary/60 shadow-md'
+    : ''}"
   bind:this={accordionElement}
 >
   <button
@@ -70,16 +71,21 @@
         {#if icon}
           <Icon {icon} class="text-primary" size="24" aria-hidden />
         {/if}
-        <h2>{title}</h2>
+        <h2 class="font-medium text-primary">
+          {title}
+        </h2>
       </div>
 
       {#if subtitleSnippet}{@render subtitleSnippet()}{:else}
-        <p class="mt-1">{subtitle}</p>
+        <p class="mt-1 text-sm dark:text-immich-dark-fg">{subtitle}</p>
       {/if}
     </div>
 
-    <div class="immich-circle-icon-button flex place-content-center place-items-center p-3">
+    <div
+      class="immich-circle-icon-button flex place-content-center place-items-center rounded-full p-3 transition-all hover:bg-immich-primary/10 dark:text-immich-dark-fg hover:dark:bg-immich-dark-primary/20"
+    >
       <svg
+        style="tran"
         width="20"
         height="20"
         fill="none"
@@ -88,7 +94,6 @@
         stroke-width="2"
         viewBox="0 0 24 24"
         stroke="currentColor"
-        aria-hidden="true"
       >
         <path d="M19 9l-7 7-7-7" />
       </svg>
@@ -104,16 +109,10 @@
 
 <style>
   svg {
-    transition: transform var(--durationNormal, 200ms) var(--curveEasyEase, ease);
+    transition: transform 0.2s ease-in;
   }
 
   [aria-expanded='true'] svg {
     transform: rotate(0.5turn);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    svg {
-      transition: none;
-    }
   }
 </style>

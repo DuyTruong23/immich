@@ -94,7 +94,7 @@ export const load = (async ({ fetch, url }) => {
   return {
     error,
     meta: {
-      title: PUBLIC_APP_NAME || 'iCloud Photos',
+      title: PUBLIC_APP_NAME || 'Photo Gallery',
     },
   };
 }) satisfies LayoutLoad;

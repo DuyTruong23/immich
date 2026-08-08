@@ -1,46 +1,14 @@
-/*
- * Ant Design 6.5.4 — Light theme (defaultAlgorithm)
- */
+:root {
+  --pg-primary: #2563eb;
+  --pg-primary-hover: #1d4ed8;
+  --pg-surface: #ffffff;
+  --pg-surface-muted: #f8fafc;
+  --pg-text: #0f172a;
+  --pg-text-muted: #64748b;
+  --pg-border: #e2e8f0;
+  --pg-loading-bg: #ffffff;
+}
 
-html.light,
-:root:not(.dark) {
-  --colorNeutralForeground1: rgba(0, 0, 0, 0.88);
-  --colorNeutralForeground2: rgba(0, 0, 0, 0.65);
-  --colorNeutralForeground3: rgba(0, 0, 0, 0.45);
-  --colorNeutralForegroundDisabled: rgba(0, 0, 0, 0.25);
-
-  --colorNeutralBackground1: #ffffff;
-  --colorNeutralBackground2: #f5f5f5;
-  --colorNeutralBackground3: #f0f0f0;
-  --colorNeutralBackground4: rgba(0, 0, 0, 0.06);
-  --colorNeutralCardBackground: #ffffff;
-
-  --colorNeutralStroke1: #d9d9d9;
-  --colorNeutralStroke2: #f0f0f0;
-
-  --colorBrandBackground: var(--ant-color-primary);
-  --colorBrandBackgroundHover: var(--ant-color-primary-hover);
-  --colorBrandBackgroundPressed: var(--ant-color-primary-active);
-  --colorBrandBackgroundSelected: var(--ant-color-primary-bg);
-  --colorBrandForeground1: var(--ant-color-primary-text);
-  --colorBrandForeground2: var(--ant-color-primary-text-hover);
-
-  --colorStatusSuccessBackground3: #52c41a;
-  --colorStatusDangerBackground3: #ff4d4f;
-  --colorStatusWarningBackground3: #faad14;
-  --colorStatusInfoBackground3: var(--ant-color-info);
-
-  --pg-primary: var(--colorBrandBackground);
-  --pg-primary-hover: var(--colorBrandBackgroundHover);
-  --pg-surface: var(--colorNeutralBackground1);
-  --pg-surface-muted: var(--colorNeutralBackground2);
-  --pg-text: var(--colorNeutralForeground1);
-  --pg-text-muted: var(--colorNeutralForeground3);
-  --pg-border: var(--colorNeutralStroke1);
-  --pg-loading-bg: var(--colorNeutralBackground1);
-
-  --immich-primary: 22 119 255;
-  --immich-bg: 255 255 255;
-  --immich-fg: 0 0 0;
-  --immich-gray: 245 245 245;
+html.light {
+  --immich-primary: var(--pg-primary);
 }

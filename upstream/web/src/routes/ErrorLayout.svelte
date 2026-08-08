@@ -1,8 +1,8 @@
 <script lang="ts">
   import ServerConnectionErrorPage from '$custom/components/ServerConnectionErrorPage.svelte';
   import { isServerConnectionError } from '$custom/utils/server-connection-error';
-  import { copyToClipboard } from '$lib/utils';
   import BrandLogo from '$lib/components/shared-components/BrandLogo.svelte';
+  import { copyToClipboard } from '$lib/utils';
   import {
     Card,
     CardBody,

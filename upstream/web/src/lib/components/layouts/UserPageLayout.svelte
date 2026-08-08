@@ -52,7 +52,7 @@
   );
 </script>
 
-<header class="relative z-40">
+<header>
   {#if !hideNavbar}
     <NavigationBar {onUploadClick} />
   {/if}
@@ -76,15 +76,13 @@
     </div>
 
     {#if title || buttons}
-      <div
-        class="absolute flex h-16 w-full place-items-center justify-between border-b border-(--fluent-stroke-2) bg-(--fluent-bg-1) p-2 text-(--fluent-fg-1)"
-      >
+      <div class="absolute flex h-16 w-full place-items-center justify-between border-b p-2 text-dark">
         <div class="flex items-center gap-2">
           {#if title}
-            <div class="fluent-subtitle pe-8 outline-none" tabindex="-1" id={headerId}>{title}</div>
+            <div class="pe-8 outline-none" tabindex="-1" id={headerId}>{title}</div>
           {/if}
           {#if description}
-            <p class="fluent-caption">{description}</p>
+            <p class="text-sm text-gray-400 dark:text-gray-600">{description}</p>
           {/if}
         </div>
 

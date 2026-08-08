@@ -160,6 +160,7 @@
         <ActionButton action={Cast} />
 
         <div
+          class="relative"
           use:clickOutside={{
             onOutclick: () => (shouldShowAccountInfoPanel = false),
             onEscape: () => (shouldShowAccountInfoPanel = false),

@@ -3,10 +3,11 @@
   import { focusTrap } from '$lib/actions/focus-trap';
   import { authManager } from '$lib/managers/auth-manager.svelte';
   import AvatarEditModal from '$lib/modals/AvatarEditModal.svelte';
+  import HelpAndFeedbackModal from '$lib/modals/HelpAndFeedbackModal.svelte';
   import { Route } from '$lib/route';
   import { userInteraction } from '$lib/stores/user.svelte';
   import { getAboutInfo, type ServerAboutResponseDto } from '@immich/sdk';
-  import { Icon, IconButton, modalManager } from '@immich/ui';
+  import { Button, Icon, IconButton, modalManager } from '@immich/ui';
   import { mdiCog, mdiLogout, mdiPencil, mdiWrench } from '@mdi/js';
   import { onMount } from 'svelte';
   import { t } from 'svelte-i18n';
@@ -28,61 +29,79 @@
 
 <div
   in:fade={{ duration: 100 }}
-  out:fade={{ duration: 80 }}
+  out:fade={{ duration: 100 }}
   id="account-info-panel"
-  class="ant-account-panel"
-  role="dialog"
-  aria-label={$t('account_settings')}
+  class="absolute end-0 top-full z-50 mt-2 w-[min(360px,100vw-50px)] rounded-3xl bg-gray-200 shadow-lg dark:border dark:border-immich-dark-gray dark:bg-immich-dark-gray"
   use:focusTrap
 >
-  <div class="ant-account-panel__content">
-    <section class="ant-account-panel__profile">
-      <div class="ant-account-panel__avatar-wrap">
-        <UserAvatar user={authManager.user} size="xl" />
+  <div
+    class="mx-4 mt-4 flex flex-col items-center justify-center gap-4 rounded-t-3xl bg-white p-4 dark:bg-immich-dark-primary/10"
+  >
+    <div class="relative">
+      <UserAvatar user={authManager.user} size="xl" />
+      <div class="absolute inset-e-0 bottom-0 size-6 rounded-full">
         <IconButton
           color="primary"
           icon={mdiPencil}
           aria-label={$t('edit_avatar')}
           size="tiny"
           shape="round"
-          class="ant-account-panel__edit-avatar"
           onclick={async () => {
             onClose?.();
             await modalManager.show(AvatarEditModal);
           }}
         />
       </div>
+    </div>
+    <div>
+      <p class="text-center text-lg font-medium text-primary">
+        {authManager.user.name}
+      </p>
+      <p class="text-sm text-gray-500 dark:text-immich-dark-fg">{authManager.user.email}</p>
+    </div>
 
-      <div class="ant-account-panel__identity">
-        <p class="ant-account-panel__name">{authManager.user.name}</p>
-        <p class="ant-account-panel__email">{authManager.user.email}</p>
-      </div>
-    </section>
-
-    <nav class="ant-account-panel__menu">
-      <a href={Route.userSettings()} class="ant-account-panel__menu-item" onclick={onClose}>
-        <Icon icon={mdiCog} size="20" aria-hidden />
-        <span>{$t('account_settings')}</span>
-      </a>
-
+    <div class="flex flex-col gap-1">
+      <Button
+        href={Route.userSettings()}
+        onclick={onClose}
+        size="small"
+        color="secondary"
+        variant="ghost"
+        shape="round"
+        class="border hover:bg-immich-primary/10 dark:border-immich-dark-gray dark:bg-gray-500 dark:text-white dark:hover:bg-immich-dark-primary/50"
+      >
+        <div class="flex place-content-center place-items-center gap-2 px-2 text-center">
+          <Icon icon={mdiCog} size="18" aria-hidden />
+          {$t('account_settings')}
+        </div>
+      </Button>
       {#if authManager.user.isAdmin}
-        <a
+        <Button
           href={Route.systemSettings()}
-          class="ant-account-panel__menu-item"
-          aria-current={page.url.pathname.includes('/admin') ? 'page' : undefined}
           onclick={onClose}
+          shape="round"
+          variant="ghost"
+          size="small"
+          color="secondary"
+          aria-current={page.url.pathname.includes('/admin') ? 'page' : undefined}
+          class="border hover:bg-immich-primary/10 dark:border-immich-dark-gray dark:bg-gray-500 dark:text-white dark:hover:bg-immich-dark-primary/50"
         >
-          <Icon icon={mdiWrench} size="20" aria-hidden />
-          <span>{$t('administration')}</span>
-        </a>
+          <div class="flex place-content-center place-items-center gap-2 px-2 text-center">
+            <Icon icon={mdiWrench} size="18" aria-hidden />
+            {$t('administration')}
+          </div>
+        </Button>
       {/if}
-    </nav>
+    </div>
+  </div>
 
-    <footer class="ant-account-panel__footer">
-      <a href={Route.logout()} class="ant-account-panel__sign-out">
-        <Icon icon={mdiLogout} size="20" aria-hidden />
-        <span>{$t('sign_out')}</span>
-      </a>
-    </footer>
+  <div class="mb-4 flex flex-col">
+    <Button
+      class="m-1 mx-4 rounded-none rounded-b-3xl bg-white p-3 dark:bg-immich-dark-primary/10"
+      href={Route.logout()}
+      leadingIcon={mdiLogout}
+      variant="ghost"
+      color="secondary">{$t('sign_out')}</Button
+    >
   </div>
 </div>

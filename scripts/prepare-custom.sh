@@ -23,12 +23,10 @@ echo "==> Merge component overrides into upstream lib"
 mkdir -p upstream/web/src/lib
 copy_merge "overrides/lib/" "upstream/web/src/lib/"
 
-echo "==> Copy branding assets and design system"
-bash "$ROOT/scripts/generate-branding-icons.sh"
+echo "==> Copy theme CSS and logo assets to static"
 mkdir -p upstream/web/static/branding
-copy_merge "branding/assets/" "upstream/web/static/branding/"
 copy_merge "branding/src/" "upstream/web/static/branding/"
-cp branding/assets/manifest.json upstream/web/static/manifest.json
+copy_merge "branding/assets/" "upstream/web/static/branding/"
 sed -e 's|@photo-gallery/branding/|/branding/|g' \
   -e "s|@import '../../../branding/src/|@import '/branding/|g" \
   custom/src/styles/custom.css > upstream/web/static/custom.css
@@ -43,19 +41,8 @@ if [ -f custom/src/hooks.client.ts ]; then
   cp custom/src/hooks.client.ts upstream/web/src/hooks.client.ts
 fi
 
-echo "==> Patch favicon branding"
 # shellcheck source=/dev/null
-source "$ROOT/custom/patches/favicon.sh"
-apply_favicon_static_patch "$ROOT"
-apply_app_html_favicon_patch "$ROOT/upstream/web/src/app.html"
-apply_app_html_stencil_patch "$ROOT/upstream/web/src/app.html"
-apply_app_html_noscript_patch "$ROOT/upstream/web/src/app.html"
-apply_layout_favicon_patch "$ROOT/upstream/web/src/routes/+layout.svelte"
-apply_manifest_patch "$ROOT/upstream/web/static/manifest.json"
-
-echo "==> Patch tab title branding"
-# shellcheck source=/dev/null
-source "$ROOT/custom/patches/layout-title.sh"
-apply_layout_title_patch "$ROOT/upstream/web/src/routes/+layout.svelte"
+source "$ROOT/scripts/restore-upstream-ui.sh"
+restore_upstream_ui "$ROOT"
 
 echo "Custom layer prepared."

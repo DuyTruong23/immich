@@ -1,45 +1,26 @@
-@import '/branding/fonts.css';
-@import '/branding/fluent-tokens.css';
 @import '/branding/theme-light.css';
 @import '/branding/theme-dark.css';
-@import '/branding/immich-bridge.css';
-@import '/branding/typography.css';
-@import '/branding/fluent/globals.css';
-@import '/branding/fluent/shell.css';
-@import '/branding/fluent/primitives.css';
-@import '/branding/fluent/navigation.css';
-@import '/branding/fluent/timeline.css';
-@import '/branding/fluent/viewer.css';
-@import '/branding/fluent/forms.css';
-@import '/branding/fluent/search-filter.css';
-@import '/branding/fluent/admin.css';
-@import '/branding/fluent/responsive.css';
-@import '/branding/component-overrides.css';
 @import '/branding/loading.css';
 
-.fluent-brand-accent,
 .pg-brand-accent {
-  color: var(--colorBrandForeground1);
+  color: var(--pg-primary);
 }
 
-.fluent-brand-surface,
 .pg-brand-surface {
-  background-color: var(--colorNeutralBackground1);
-  color: var(--colorNeutralForeground1);
+  background-color: var(--pg-surface);
+  color: var(--pg-text);
 }
 
-.fluent-server-error,
 .pg-server-error {
   display: flex;
   min-height: 100dvh;
   width: 100%;
   align-items: center;
   justify-content: center;
-  background: var(--colorNeutralBackground2, #f5f5f5);
-  padding: var(--spacingHorizontalL);
+  background: #24104f;
+  padding: 1rem;
 }
 
-.fluent-server-error__scene,
 .pg-server-error__scene {
   width: min(960px, 100%);
   height: auto;

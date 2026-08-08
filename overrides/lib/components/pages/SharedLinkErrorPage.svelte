@@ -4,7 +4,7 @@
 </script>
 
 <svelte:head>
-  <title>{$t('error')} · iCloud Photos</title>
+  <title>{$t('error')} - Immich</title>
 </svelte:head>
 
 <section class="flex h-dvh w-dvw flex-col place-content-center place-items-center px-4">
