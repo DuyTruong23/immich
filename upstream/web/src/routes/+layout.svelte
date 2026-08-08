@@ -41,7 +41,6 @@
   import { t } from 'svelte-i18n';
   import { get } from 'svelte/store';
   import '../app.css';
-  import '$custom/branding/setup-branding';
   import '$custom/styles/custom.css';
 
   interface Props {
@@ -238,8 +237,11 @@
 
 <svelte:head>
   <title>{page.data.meta?.title ? `${page.data.meta.title} · iCloud Photos` : 'iCloud Photos'}</title>
-  <link rel="icon" type="image/svg+xml" href="/branding/icloud-photos-icon.svg" />
-  <link rel="apple-touch-icon" href="/branding/icloud-photos-icon.svg" />
+  <!-- branding-favicon-icloud2 -->
+  <link rel="icon" href="/favicon.ico?v=icloud2" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=icloud2" />
+  <link rel="icon" type="image/svg+xml" href="/branding/icloud-photos-icon.svg?v=icloud2" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180.png?v=icloud2" />
   <link rel="manifest" href="/manifest.json" crossorigin="use-credentials" />
   <meta name="theme-color" content="white" media="(prefers-color-scheme: light)" />
   <meta name="theme-color" content="black" media="(prefers-color-scheme: dark)" />

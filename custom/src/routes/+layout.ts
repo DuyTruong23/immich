@@ -1,6 +1,6 @@
-import '$custom/branding/setup-branding';
 import { commandPaletteManager } from '@immich/ui';
 import { goto } from '$app/navigation';
+import '$lib/branding/icloud-logos';
 import {
   PUBLIC_APP_NAME,
   PUBLIC_COMPANY_NAME,

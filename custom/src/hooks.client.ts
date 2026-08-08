@@ -1,4 +1,3 @@
-import '$custom/branding/setup-branding';
 import { isHttpError, type ApiHttpError } from '@immich/sdk';
 import type { HandleClientError } from '@sveltejs/kit';
 

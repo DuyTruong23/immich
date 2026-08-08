@@ -24,6 +24,7 @@ mkdir -p upstream/web/src/lib
 copy_merge "overrides/lib/" "upstream/web/src/lib/"
 
 echo "==> Copy branding assets and design system"
+bash "$ROOT/scripts/generate-branding-icons.sh"
 mkdir -p upstream/web/static/branding
 copy_merge "branding/assets/" "upstream/web/static/branding/"
 copy_merge "branding/src/" "upstream/web/static/branding/"
@@ -43,13 +44,14 @@ if [ -f custom/src/hooks.client.ts ]; then
 fi
 
 echo "==> Patch favicon branding"
-APP_HTML="$ROOT/upstream/web/src/app.html"
-if [ -f "$APP_HTML" ] && ! grep -q "icloud-photos-icon.svg" "$APP_HTML"; then
-  sed -i 's|<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />|<link rel="icon" type="image/svg+xml" href="/branding/icloud-photos-icon.svg" />\n    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />|' "$APP_HTML" 2>/dev/null \
-    || sed -i '' 's|<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />|<link rel="icon" type="image/svg+xml" href="/branding/icloud-photos-icon.svg" />\n    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />|' "$APP_HTML"
-  sed -i 's|href="/apple-icon-180.png"|href="/branding/icloud-photos-icon.svg"|' "$APP_HTML" 2>/dev/null \
-    || sed -i '' 's|href="/apple-icon-180.png"|href="/branding/icloud-photos-icon.svg"|' "$APP_HTML"
-fi
+# shellcheck source=/dev/null
+source "$ROOT/custom/patches/favicon.sh"
+apply_favicon_static_patch "$ROOT"
+apply_app_html_favicon_patch "$ROOT/upstream/web/src/app.html"
+apply_app_html_stencil_patch "$ROOT/upstream/web/src/app.html"
+apply_app_html_noscript_patch "$ROOT/upstream/web/src/app.html"
+apply_layout_favicon_patch "$ROOT/upstream/web/src/routes/+layout.svelte"
+apply_manifest_patch "$ROOT/upstream/web/static/manifest.json"
 
 echo "==> Patch tab title branding"
 # shellcheck source=/dev/null
